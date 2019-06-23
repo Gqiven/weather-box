@@ -1,0 +1,12 @@
+<!--index.wxml-->
+<view class="container">
+
+  <!-- 用户 openid -->
+  <view class="click-box">
+    <div>
+      <!-- <button wx:if="{{clickbtn === true}}" open-type="getUserInfo" bindtap="onGetOpenid">授权</button> -->
+      <button wx:if="{{clickbtn === true}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+    </div>
+  </view>
+
+</view>

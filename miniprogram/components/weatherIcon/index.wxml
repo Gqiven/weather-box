@@ -1,0 +1,4 @@
+<view>
+  <!-- 这个组件 只是一个组件使用例子，实际项目并未使用 -->
+  <p>{{iconName}}--icon components</p>
+</view>

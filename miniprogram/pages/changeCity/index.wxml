@@ -1,0 +1,40 @@
+<view class="container">
+  <view class="max-width input-line">
+    <div class="input-box">
+      <icon type="search" size="12" color="#7b7b7b"/>
+      <input type="text" placeholder="请输入城市名，快速查询天气" confirm-type="search" bindinput="updateValue" bindfocus="clearValue" />
+      <span bindtap="searchData">搜索</span>
+    </div>
+    <navigator open-type="navigateBack" class="back-btn">取消</navigator>
+  </view>
+
+  <view wx:if="{{showList == true}}" class="max-width">
+    <view wx:if="{{ nullMsg != '' }}">
+      <view class="result-text">
+        {{nullMsg}}
+      </view>
+    </view>
+    <view wx:else>
+      <view wx:for="{{resultData}}" wx:key="{{index}}" class="result-text"
+        data-adcode="{{item.adcode}}" data-province="{{item.province}}"
+        data-city="{{item.city}}" data-district="{{item.district}}"
+        bindtap="selectCode">
+        {{item.text}}
+      </view>
+    </view>
+  </view>
+
+  <view wx:else>
+    <view class="max-width margin-box">
+      <view>猜你想找</view>
+      <view style="overflow: hidden;">
+        <div class="city-label active">定位</div>
+        <div wx:for="{{hotCity}}" wx:key="{{index}}" class="city-label" data-city="{{item.city}}" data-adcode="{{item.adcode}}" bindtap="selectCity">{{item.city}}</div>
+      </view>
+    </view>
+
+    <view class="max-width margin-box">
+      <view>历史记录</view>
+    </view>
+  </view>
+</view>

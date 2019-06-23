@@ -1,0 +1,60 @@
+<!--pages/addFunction/addFunction.wxml-->
+<view>
+  <div v-if="placeInfo && weatherData" class="container">
+    <navigator url="/pages/changeCity/index">
+      <i class="iconfont icon-map"></i> 
+      {{city || district}}
+      <i class="iconfont icon-sanjiaoxing_o"></i>
+    </navigator>
+    <!-- 今日天气 -->
+    <div class="today-base-info">
+      <div class="temp">
+        <!-- 实时温度 -->
+        <b>{{liveData.temperature}}℃</b>
+      </div>
+      <div>
+        <view>
+          <i class="iconfont icon-{{iconData[liveData.weather]}}"></i> {{liveData.weather}}
+          <span>风向：{{liveData.winddirection}}</span>
+        </view>
+        <view>
+          <i class="iconfont icon-kongqishidu"></i> {{liveData.humidity}}
+          <span>风力：{{liveData.windpower}}</span>
+        </view>
+      </div>
+    </div>
+    <!-- 未来三天天气 -->
+    <view class="swiper-box">
+      <swiper indicator-dots="{{indicatorDots}}" display-multiple-items="3" current="{{currentIndex}}"
+        bindchange="swiperChange">
+        <block wx:for="{{forecastsData}}" wx:key="{{index}}">
+          <swiper-item class="{{index == 0 ? 'today-bg' : ''}}">
+            <view style="height: 100%">
+              <text class="week-day">{{item.date}}</text>
+              <view>
+                <i class="iconfont icon-{{iconData[item.dayweather]}}"></i>
+              </view>
+              <view wx:if="{{item.dayweather == item.nightweather}}">{{item.dayweather}}</view>
+              <view wx:else>{{item.dayweather}}转{{item.nightweather}}</view>
+              <view style="margin-top: 5px;margin-bottom:5px;">{{item.daytemp}}~{{item.nighttemp}}℃</view>
+              <!-- <view>{{item.daywind}}{{item.daypower}}~{{item.nightwind}}{{item.nightpower}}</view> -->
+              <view>{{item.daywind}}{{item.daypower}}</view>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="dots">
+        <block wx:for="{{2}}" wx:key="index">
+          <span class="dot{{index == currentIndex ? ' active' : ''}}"></span>
+        </block>
+      </view> 
+    </view>
+
+    
+  </div>
+  <view class="canvas-box">
+    <view style="color: #fff; font-size: 12px; padding-left: 20px;padding-bottom: 20px;">近三天天气折线图</view>
+    <canvas style="width: 300px;height: 200px;" canvas-id="firstCanvas"></canvas>
+  </view>
+  
+</view>

@@ -1,0 +1,16 @@
+/**index.wxss**/
+
+page {
+  background: #f6f6f6;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.click-box {
+  height: 100vh;
+}
+.click-box button {
+  display: block;
+  background-color: #ffffff;
+}
